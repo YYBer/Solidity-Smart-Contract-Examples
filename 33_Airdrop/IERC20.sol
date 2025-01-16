@@ -1,20 +1,8 @@
-// SPDX-License-Identifier: MIT
-// WTF Solidity by 0xAA
-
 pragma solidity ^0.8.21;
 
-/**
- * @dev ERC20 接口合约.
- */
 interface IERC20 {
-    /**
-     * @dev 释放条件：当 `value` 单位的货币从账户 (`from`) 转账到另一账户 (`to`)时.
-     */
+    
     event Transfer(address indexed from, address indexed to, uint256 value);
-
-    /**
-     * @dev 释放条件：当 `value` 单位的货币从账户 (`owner`) 授权给另一账户 (`spender`)时.
-     */
     event Approval(address indexed owner, address indexed spender, uint256 value);
 
     /**
