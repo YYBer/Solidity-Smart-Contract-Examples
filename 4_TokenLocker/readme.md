@@ -1,41 +1,46 @@
-A simple token locking mechanism
+# Token Locker Implementation on Ralph/Alephium
 
-#
-TokenLocker Contract Features:
-Constructor Initialization:
+## Overview 🎯
+The **TokenLocker** contract provides a straightforward mechanism for locking Fungible Tokens for a specified duration. Built on the Alephium [Fungible Token Standard](https://docs.alephium.org/dapps/standards/fungible-tokens/#fungible-token-standard), it ensures secure time-based token releases.
 
-Sets target token address for locking
-Establishes beneficiary address for receiving tokens
-Sets lock duration (lockTime)
-Records start time of lock period
-Validates lock time is greater than zero
-Emits TokenLockStart event
+---
 
-Release Function:
+## Contract Features 🚀
 
-Releases all locked tokens after lock period
-Validates current time exceeds lock period
-Checks token balance available for release
-Transfers full token amount to beneficiary
-Emits Release event with details
+### **Constructor Initialization**
+- Sets the **target token address** for the locking mechanism
+- **Beneficiary Setup**: Configures recipient address for token release
+- **Duration Control**: Establishes the lock timeframe
+- **Timestamp Recording**: Captures lock period start time
+- **Validation**: Ensures positive lock duration
+- **Event Emission**: Logs lock initiation for transparency
 
+### **Release Mechanism**
+- Manages the release of tokens after the lock period expires
+- **Time Validation**: Confirms lock period completion
+- **Balance Check**: Verifies available tokens for release
+- **Transfer**: Executes full token transfer to beneficiary
+- **Event Logging**: Records release details for tracking
 
-State Management:
+### **State Management**
+- **Token Address**: Stores immutable target token information
+- **Beneficiary Data**: Maintains recipient address details
+- **Duration Storage**: Records lock period length
+- **Time Tracking**: Preserves start timestamp
+- **Parameter Protection**: All core values are immutable
 
-Stores immutable token address
-Maintains immutable beneficiary address
-Records immutable lock duration
-Tracks immutable start timestamp
-All core parameters are immutable for security
+---
 
-#
-Security Features:
+## Security Features 🔒
+- **Time Validation**: Enforces minimum lock duration
+- **Balance Verification**: Checks available tokens before release
+- **Immutable Design**: Core parameters cannot be modified
+- **Safe Transfers**: Implements secure token transfer protocols
+- **Release Protection**: Time-based validation for token release
 
-Lock time validation  
-Balance check before release  
-Immutable core parameters  
-Safe token transfer handling  
-Time-based release validation  
+---
 
-#
-Instead of using ERC20, please use the Fungible Token Standard: https://docs.alephium.org/dapps/standards/fungible-tokens/#fungible-token-standard
+## Development Notes 🛠️
+- **Token Standard**: Implements Alephium's [Fungible Token Standard](https://docs.alephium.org/dapps/standards/fungible-tokens/#fungible-token-standard)
+- **Future Enhancements**: Consider adding partial release options or multi-beneficiary support
+- **Simplicity**: Designed for straightforward token locking with minimal complexity

@@ -1,65 +1,49 @@
-Automatically split Alph payments among multiple recipients based on predefined shares  
+# PaymentSplit Implementation on Ralph/Alephium
 
-#
-PaymentSplit Contract Features:
-Constructor Initialization:
+## Overview 🎯
+The **PaymentSplit** contract enables automatic distribution of ALPH payments among multiple recipients based on predefined shares. This implementation ensures transparent, secure, and efficient payment splitting through a robust smart contract system.
 
-Takes arrays of payee addresses and their corresponding shares
-Validates arrays have matching lengths and non-zero payees
-Initializes share distribution for all payees
-Adds payees to the contract's payment system
+---
 
-Payment Reception (receive):
+## Contract Features 🚀
 
-Accepts ETH payments to the contract
-Automatically tracks received payments
-Emits PaymentReceived event for tracking
-No direct distribution on reception
+### **Constructor Initialization**
+- Configures payment distribution through **payee addresses** and their corresponding **share values**.
+- **Validation**: Ensures arrays have matching lengths and non-zero payees.
+- **Share System**: Initializes and stores distribution percentages for all payees.
+- **Setup**: Integrates payees into the contract's payment infrastructure.
 
-Release Function:
+### **Payment Reception**
+- Automatically handles incoming **ALPH** payments to the contract.
+- **Tracking**: Records all received payments in the contract state.
+- **Event Emission**: Logs payment receipts for transparency.
+- **Delayed Distribution**: Stores payments for later distribution rather than immediate splitting.
 
-Allows withdrawal of accumulated payments
-Calculates correct share amount for each payee
-Updates total released amounts
-Transfers ETH to payee address
-Emits PaymentReleased event
+### **Release Mechanism**
+- Enables withdrawal of accumulated payments for eligible payees.
+- **Share Calculation**: Computes exact payment amounts based on predefined shares.
+- **Balance Management**: Updates released amount tracking.
+- **Transfer**: Sends ALPH directly to payee addresses.
+- **Event Logging**: Records all payment releases for auditing.
 
-Releasable Calculation:
+### **Releasable Amount Calculation**
+- Provides real-time calculation of pending payments for any address.
+- **Share-based Computation**: Factors in individual share percentages.
+- **Balance Tracking**: Considers total received funds versus released amounts.
+- **Withdrawal Limit**: Returns maximum available withdrawal amount.
 
-Computes pending payment amount for an address
-Considers total received funds and total released
-Accounts for individual share percentages
-Returns available withdrawal amount
+---
 
-Pending Payment Calculator:
+## Security Features 🔒
+- **Address Validation**: Prevents zero-address assignments
+- **Share Requirements**: Enforces non-zero share values
+- **Duplicate Protection**: Prevents multiple registrations of the same payee
+- **Balance Checks**: Validates sufficient funds before releases
+- **Safe Arithmetic**: Implements secure share calculations
+- **Protected Transfers**: Uses secure ALPH transfer mechanisms
 
-Calculates exact payment due to an account
-Uses formula: (totalReceived * shares) / totalShares - alreadyReleased
-Ensures proportional distribution
-Prevents overpayment
+---
 
-Private Payee Addition:
-
-Internal function for adding new payees
-Validates payee address and share amount
-Updates total shares and individual shares
-Prevents duplicate payee entries
-
-
-State Management:
-
-Tracks total shares in the system
-Maintains total released amount
-Maps addresses to their shares
-Maps addresses to their released amounts
-Stores array of payee addresses
-
-#
-Security Features:
-
-Zero address validation  
-Non-zero shares requirement  
-Duplicate payee prevention  
-Balance checks before release  
-Proper arithmetic for share calculations  
-Safe ETH transfer mechanisms  
+## Development Notes 🛠️
+- **Future Enhancements**: Consider adding dynamic share adjustment or emergency pause functionality
+- **Integration Points**: Can be extended to support token payments beyond native ALPH

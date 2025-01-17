@@ -1,49 +1,50 @@
-Goal: WETH in Ralph/Alephium  
-#
-WETH Contract Features:
-Deposit Function:
+# WETH Implementation on Ralph/Alephium
 
-Allows users to convert ALPH to wrapped ALPH (WALPH)
-Automatically mints WALPH tokens equal to deposited ALPH amount
-Records the deposit through event emission
-Links native ALPH to token standard
+## Overview 🎯
+To create a **Wrapped ALPH (WALPH)** contract on Ralph/Alephium that follows the [Fungible Token Standard](https://docs.alephium.org/dapps/standards/fungible-tokens/#fungible-token-standard). This contract will enable seamless wrapping and unwrapping of ALPH tokens, ensuring transparency, security, and user-friendliness.
 
-Automatic Deposit (fallback/receive):
+---
 
-Captures any ALPH sent directly to the contract
-Automatically converts received ALPH to WALPH tokens
-Provides seamless integration for users
-Makes the contract more user-friendly
+## Contract Features 🚀
 
-Withdraw Function:
+### **Deposit Function**
+- Allows users to convert **ALPH** into **Wrapped ALPH (WALPH)** tokens.
+- **Minting**: Automatically mints WALPH tokens equal to the deposited ALPH amount.
+- **Event Emission**: Tracks deposits through events for transparency.
+- **Integration**: Links native ALPH to the fungible token standard.
 
-Enables users to convert WALPH back to native ALPH
-Burns the WALPH tokens upon withdrawal
-Transfers equivalent ALPH back to user
-Tracks withdrawals through event emission
+### **Automatic Deposit (Fallback/Receive)**
+- Automatically captures **ALPH** sent directly to the contract.
+- Converts received ALPH into WALPH tokens for seamless user experience.
+- Provides user-friendly integration for direct ALPH transfers.
 
-Event Tracking:
+### **Withdraw Function**
+- Enables users to convert **WALPH** back into native **ALPH**.
+- **Burning**: WALPH tokens are burned upon withdrawal.
+- **Transfer**: Equivalent ALPH is transferred back to the user.
+- **Event Emission**: Tracks withdrawals for transaction transparency.
 
-Deposit events track ALPH wrapping operations
-Withdrawal events record ALPH unwrapping
-Provides transparent transaction history
-Enables easy integration with other protocols
+### **Event Tracking**
+- **Deposit Events**: Log ALPH wrapping operations.
+- **Withdrawal Events**: Record ALPH unwrapping.
+- Facilitates integration with other protocols by providing a clear transaction history.
 
-Inheritance:
+### **Inheritance**
+- Implements the **Fungible Token Standard** for WALPH tokens.
+- Ensures compatibility with token interfaces.
+- Provides standard token methods such as `transfer`, `approve`, etc.
 
-Inherits from ERC20 standard implementation
-Maintains standard token functionality
-Ensures compatibility with token interfaces
-Provides standard token methods (transfer, approve, etc.)
+---
 
-#
-Security Features:
+## Security Features 🔒
+- **Balance Validation**: Ensures sufficient balance before allowing withdrawals.
+- **Mint/Burn Updates**: Automatically updates balances through minting and burning operations.
+- **Direct 1:1 Conversion**: Maintains a fixed ALPH-to-WALPH conversion ratio.
+- **Safe Transfers**: Implements secure mechanisms for transferring tokens and native ALPH.
+- **Operation Protection**: Prevents invalid or malicious operations.
 
-Balance validation before withdrawals  
-Automatic balance updates through mint/burn  
-Direct token-ALPH conversion ratio (1:1)  
-Safe ETH transfer mechanisms  
-Protection against invalid operations  
+---
 
-#
-Instead of using ERC20, please use the Fungible Token Standard: https://docs.alephium.org/dapps/standards/fungible-tokens/#fungible-token-standard
+## Development Notes 🛠️
+- **Fungible Token Standard**: This contract adheres to the [Fungible Token Standard](https://docs.alephium.org/dapps/standards/fungible-tokens/#fungible-token-standard) instead of the ERC20 standard, ensuring compatibility with Ralph/Alephium.
+- **Future Enhancements**: Consider adding multi-sig functionality or fee mechanisms for advanced use cases.

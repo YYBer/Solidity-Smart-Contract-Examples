@@ -1,53 +1,67 @@
-Governance timelock
+# Governance Timelock Implementation on Ralph/Alephium
 
-#
-Timelock Contract Features:
-Transaction Queueing (queueTransaction):
+## Overview 🎯
+The **Timelock** contract implements a secure delay mechanism for governance actions, ensuring transparent and controlled execution of administrative operations. This provides additional security and time for community review of governance decisions.
 
-Allows admin to queue transactions for delayed execution
-Takes target address, value, function signature, and data
-Requires execution time to meet minimum delay
-Generates and stores transaction hash
-Emits QueueTransaction event
+---
 
-Transaction Execution (executeTransaction):
+## Contract Features 🚀
 
-Executes previously queued transactions
-Validates transaction exists in queue
-Checks execution time meets delay requirement
-Ensures execution within grace period
-Handles both direct calls and function calls
-Returns execution result data
-Emits ExecuteTransaction event
+### **Transaction Queueing**
+- Enables administrators to schedule transactions for future execution
+- **Parameter Management**: 
+ - Target address specification
+ - Value amount configuration
+ - Function signature definition
+ - Transaction data inclusion
+- **Time Control**: Enforces minimum delay requirements
+- **Storage**: Generates and maintains transaction hashes
+- **Event Emission**: Logs queue operations for transparency
 
-Transaction Cancellation (cancelTransaction):
+### **Transaction Execution**
+- Manages the execution of queued transactions after delay period
+- **Validation Process**:
+ - Confirms transaction existence in queue
+ - Verifies delay period completion
+ - Ensures execution within grace period
+- **Execution Handling**:
+ - Supports direct contract calls
+ - Handles function-specific calls
+ - Returns execution results
+- **Event Tracking**: Records all execution operations
 
-Allows admin to cancel queued transactions
-Removes transaction from queue
-Requires transaction to exist in queue
-Emits CancelTransaction event
+### **Transaction Cancellation**
+- Provides administrative control to cancel queued transactions
+- **Queue Management**: Removes transactions from pending queue
+- **Validation**: Ensures transaction exists before cancellation
+- **Event Logging**: Records cancellation operations
 
-Admin Management:
+### **Admin Management**
+- Enables secure administration address updates
+- **Access Control**: Restricted to timelock contract calls
+- **Transparency**: Emits events for admin changes
 
-Allows changing admin address
-Requires call from timelock contract itself
-Emits NewAdmin event
+### **State Management**
+- **Queue Tracking**: Maintains pending transaction records
+- **Address Control**: Manages administrative permissions
+- **Time Parameters**: 
+ - Stores delay duration
+ - Maintains grace period (7 days)
+- **Hash Storage**: Records transaction identifiers
 
+---
 
-State Management:
+## Security Features 🔒
+- **Access Restriction**: Admin-only operation control
+- **Admin Updates**: Only through timelock contract
+- **Time Enforcement**: Mandatory delay period
+- **Execution Window**: Grace period limitations
+- **Transaction Safety**: Comprehensive verification
+- **Protected Execution**: Secure handling mechanisms
 
-Tracks queued transactions
-Maintains admin address
-Stores delay period
-Defines grace period constant (7 days)
-Records transaction hashes
+---
 
-#
-Security Features:
-
-Admin-only access control  
-Timelock-only admin changes  
-Delay period enforcement  
-Grace period limitations  
-Transaction verification  
-Safe execution handling  
+## Development Notes 🛠️
+- **Future Enhancements**: Consider implementing multi-sig requirements
+- **Integration**: Can be extended for DAO governance systems
+- **Flexibility**: Supports various transaction types and parameters

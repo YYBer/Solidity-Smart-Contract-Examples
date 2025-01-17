@@ -1,74 +1,64 @@
-Implement signature verification and NFT minting with signature    
-#
-ECDSA Library Features:
+# NFT Signature Verification Implementation on Ralph/Alephium
 
-Signature Verification (verify):
+## Overview 🎯
+The **SignatureNFT** system enables secure NFT minting through signature verification, implementing Alephium's [Non-fungible Token Standard](https://docs.alephium.org/dapps/standards/non-fungible-tokens/). This ensures controlled minting through cryptographic authorization.
 
-Validates if a signature was created by a specific signer
-Takes message hash, signature, and expected signer address
+---
 
+## Contract Features 🚀
 
-Signer Recovery (recoverSigner):
+### **ECDSA Verification Library**
+- **Signature Validation**:
+ - Verifies signature authenticity
+ - Validates signer authority
+ - Processes message hash inputs
+- **Signer Recovery**:
+ - Extracts r, s, v components
+ - Recovers signing address
+ - Utilizes assembly optimization
+- **Message Processing**:
+ - Creates standardized message hashes
+ - Applies Alephium-specific prefixing
+ - Prevents arbitrary data signing
 
-Recovers the address that created a signature
-Breaks down 65-byte signature into r, s, v components using assembly
-Uses ecrecover to get the signer's address
+### **SignatureNFT Contract**
+- **Signature-Based Minting**:
+ - NFT standard integration
+ - Signature validation requirements
+ - Double-mint prevention system
+- **Signer Management**:
+ - Immutable authorized signer
+ - Deployment-time configuration
+- **Hash Functions**:
+ - Account-based message hashing
+ - TokenID incorporation
+ - Signature verification flow
 
+### **Verification Contract**
+- **Hash Generation**:
+ - Address and tokenId hashing
+ - Protocol-specific prefixing
+- **Verification Pipeline**:
+ - Complete validation flow
+ - Input parameter processing
+ - Signature authenticity checks
+- **Signature Handling**:
+ - Component extraction (r, s, v)
+ - Address recovery mechanisms
 
-Message Hash Creation (toEthSignedMessageHash):
+---
 
-Creates Ethereum-specific signed message hash
-Adds standard Ethereum prefix to prevent signing arbitrary data
+## Security Features 🔒
+- **Signature Validation**: 65-byte length requirement
+- **Mint Protection**: Double-minting prevention
+- **Signer Control**: Immutable authorized signers
+- **Message Safety**: Standardized prefixing
+- **Optimized Processing**: Assembly-level operations
+- **Recovery Checks**: Comprehensive signer verification
 
-#
-SignatureNFT Contract Features:
+---
 
-Signature-Based Minting:
-
-Inherits from ERC721 for NFT functionality
-Only allows minting with valid signatures from authorized signer
-Prevents double-minting with mintedAddress mapping
-
-
-Immutable Signer:
-
-Stores authorized signer address that can't be changed after deployment
-
-
-Verification Functions:
-
-getMessageHash: Creates hash from account and tokenId
-verify: Validates signatures against authorized signer
-
-#
-VerifySignature Contract Features:
-
-Message Hash Creation:
-
-getMessageHash: Creates hash from address and tokenId
-getEthSignedMessageHash: Adds Ethereum-specific prefix
-
-
-Comprehensive Verification:
-
-verify: Complete verification flow from inputs to signature check
-Takes signer, address, tokenId, and signature
-
-
-Signature Processing:
-
-splitSignature: Breaks down signature into components (r, s, v)
-recoverSigner: Recovers the signing address
-
-#
-Security Features:
-
-Signature length validation (65 bytes)
-Prevention of double minting
-Immutable signer address
-Standard Ethereum message prefix
-Assembly-level signature processing
-
-#
-Non-fungible Tokens (NFTs): https://docs.alephium.org/dapps/standards/non-fungible-tokens/
-
+## Development Notes 🛠️
+- **Token Standard**: Implements Alephium's [Non-fungible Token Standard](https://docs.alephium.org/dapps/standards/non-fungible-tokens/)
+- **Future Enhancements**: Consider adding multi-signer support or time-based signature expiration
+- **Gas Optimization**: Utilizes assembly for efficient signature processing

@@ -1,43 +1,64 @@
-Implement an ERC20-like token and airdrop functionality on the Alephium blockchain using Ralph  
-#
-Airdrop Contract Features:
+# Multi-Token Airdrop Implementation on Ralph/Alephium
 
-Multi-Token Transfer (multiTransferToken):
+## Overview 🎯
+The **Airdrop** contract enables efficient distribution of both ALPH and fungible tokens to multiple recipients in single transactions. Built on Alephium's [Fungible Token Standard](https://docs.alephium.org/dapps/standards/fungible-tokens/#fungible-token-standard), it provides secure and gas-efficient token distribution with fallback mechanisms.
 
-Allows sending ERC20 tokens to multiple addresses in one transaction
-Takes an ERC20 token address, array of recipient addresses, and array of amounts
-Requires prior approval of tokens from sender to contract
-Checks that addresses and amounts arrays have matching lengths
-Validates total amount against approved allowance
+---
 
+## Contract Features 🚀
 
-Multi-ETH Transfer (multiTransferETH):
+### **Multi-Token Transfer**
+- Executes batch transfers of fungible tokens to multiple recipients
+- **Input Management**:
+ - Token contract address specification
+ - Recipient address array handling
+ - Amount distribution configuration
+- **Validation Process**:
+ - Verifies sender's token approval
+ - Confirms matching array lengths
+ - Validates total distribution amount
+ - Checks allowance sufficiency
 
-Enables sending ETH to multiple addresses in one transaction
-Takes arrays of recipient addresses and amounts
-Verifies sent ETH value matches total amount to distribute
-Has failure handling mechanism - stores failed transfers in failTransferList
+### **Multi-ALPH Transfer**
+- Facilitates batch distribution of native ALPH
+- **Distribution Control**:
+ - Processes multiple recipients simultaneously
+ - Manages varied amount allocations
+- **Validation**:
+ - Verifies total ALPH value
+ - Tracks successful transfers
+- **Error Handling**: Records failed transfers for recovery
 
+### **Failed Transfer Recovery**
+- Enables recovery of failed ALPH transfers
+- **Recovery Options**:
+ - Original recipient withdrawal
+ - Alternative address specification
+- **State Management**:
+ - Tracks failed transfer amounts
+ - Resets balances post-recovery
+- **Verification**: Validates recovery eligibility
 
-Failed Transfer Recovery (withdrawFromFailList):
+### **Utility Functions**
+- **Sum Calculation**:
+ - Computes total distribution amounts
+ - Supports validation operations
+- **Internal Checks**:
+ - Verifies distribution parameters
+ - Ensures accurate calculations
 
-Allows recipients to withdraw their ETH if initial transfer failed
-Recipients can specify a different address to receive the failed transfer
-Resets the failed amount to zero after successful withdrawal
+---
 
+## Security Features 🔒
+- **Balance Verification**: Pre-transfer amount validation
+- **Allowance Checks**: Token approval confirmation
+- **Failed Transfer Management**: Robust recovery system
+- **Reentrance Protection**: State-first updates
+- **Safe Transfers**: Secure token handling mechanisms
 
-Helper Function (getSum):
+---
 
-Calculates sum of an array of amounts
-Used internally for validation checks
-
-#
-Security Features:
-
-Balance checks before transfers  
-Allowance validation  
-Failed transfer handling for ETH  
-Reentrance protection through state updates before transfers  
-
-#
-Instead of using ERC20, please use the Fungible Token Standard: https://docs.alephium.org/dapps/standards/fungible-tokens/#fungible-token-standard
+## Development Notes 🛠️
+- **Token Standard**: Implements Alephium's [Fungible Token Standard](https://docs.alephium.org/dapps/standards/fungible-tokens/#fungible-token-standard)
+- **Gas Efficiency**: Optimized for batch operations
+- **Future Enhancements**: Consider adding merkle proof validation for large airdrops

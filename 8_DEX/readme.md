@@ -1,87 +1,73 @@
-Implements a simple automated market maker (AMM) for token swapping
+# Automated Market Maker (AMM) Implementation on Ralph/Alephium
 
-#
-Core Features:
-Liquidity Management:
+## Overview 🎯
+The **SimpleAMM** contract implements a constant product automated market maker for token swapping on Alephium. Built on the [Fungible Token Standard](https://docs.alephium.org/dapps/standards/fungible-tokens/#fungible-token-standard), it enables decentralized token exchanges and liquidity provision.
 
-addLiquidity: Allows users to deposit token pairs
+---
 
-Calculates liquidity tokens based on deposit amounts
-For first deposit: uses geometric mean (sqrt) of amounts
-For subsequent deposits: maintains price ratio
-Mints LP tokens representing share of pool
-Emits Mint event
+## Contract Features 🚀
 
+### **Liquidity Management**
+- **Liquidity Addition**:
+ - Token pair deposit handling
+ - Dynamic liquidity token calculation:
+   - First deposit: Geometric mean (sqrt) based
+   - Subsequent: Price ratio maintained
+ - LP token minting mechanism
+ - Event emission for tracking
+- **Liquidity Removal**:
+ - LP token burning process
+ - Proportional withdrawal calculation
+ - Underlying asset return
+ - Reserve updates
+ - Withdrawal event logging
 
-removeLiquidity: Enables withdrawal of liquidity
+### **Trading Operations**
+- **Token Swapping**:
+ - Parameter validation
+ - Output calculation using AMM formula
+ - Minimum output enforcement
+ - Token transfer execution
+ - Reserve state updates
+ - Swap event tracking
 
-Burns LP tokens and returns underlying assets
-Calculates withdrawal amounts proportionally
-Transfers tokens back to user
-Updates reserves
-Emits Burn event
+### **Price Discovery**
+- **Output Calculation**:
+ - Constant product formula implementation
+ - Factors:
+   - Input amount consideration
+   - Current reserve states
+ - Zero-value validation
+ - Formula: `amountOut = (amountIn * reserveOut) / (reserveIn + amountIn)`
 
+### **State Management**
+- **Token Management**:
+ - Paired token address storage
+ - Reserve balance tracking
+ - LP token supply monitoring
+- **Utility Functions**:
+ - Custom square root calculation
+ - Value comparison helpers
 
+---
 
-Trading Functionality:
+## Security Features 🔒
+- **Input Protection**:
+ - Non-zero amount validation
+ - Token address verification
+ - Liquidity sufficiency checks
+- **Reserve Safety**:
+ - Post-operation reserve updates
+ - Real balance verification
+ - Constant product maintenance
+- **Transfer Security**:
+ - Fungible Token Standard compliance
+ - Transfer approval requirements
+ - Success validation mechanisms
 
-swap: Enables token exchanges
+---
 
-Validates input parameters
-Calculates output amount using AMM formula
-Enforces minimum output amount
-Handles transfers of tokens
-Updates reserves
-Emits Swap event
-
-
-
-Price Calculation:
-
-getAmountOut: Implements constant product formula
-
-Calculates trade output based on:
-
-Input amount
-Current reserves
-
-
-Ensures reserves and input are non-zero
-Uses formula: amountOut = (amountIn * reserveOut) / (reserveIn + amountIn)
-
-
-
-State Management:
-Token Pairs:
-
-Stores addresses of both tokens (token0, token1)
-Maintains current reserves (reserve0, reserve1)
-Tracks total supply of LP tokens
-
-Helper Functions:
-
-sqrt: Custom square root implementation
-min: Returns smaller of two values
-
-#
-Security Features:
-Input Validation:
-
-Checks for non-zero amounts  
-Validates token addresses  
-Requires sufficient liquidity  
-
-Reserve Management:
-
-Updates reserves after every operation  
-Uses real balances instead of stored values  
-Maintains constant product invariant  
-
-Transfer Safety:
-
-Uses OpenZeppelin's ERC20 implementation  
-Requires approval for token transfers  
-Validates transfer success  
-
-#
-Instead of using ERC20, please use the Fungible Token Standard: https://docs.alephium.org/dapps/standards/fungible-tokens/#fungible-token-standard
+## Development Notes 🛠️
+- **Token Standard**: Implements Alephium's [Fungible Token Standard](https://docs.alephium.org/dapps/standards/fungible-tokens/#fungible-token-standard)
+- **Future Enhancements**: Consider adding flash loan protection, price oracle integration
+- **Gas Optimization**: Efficient math operations implementation

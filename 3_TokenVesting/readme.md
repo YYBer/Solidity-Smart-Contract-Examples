@@ -1,53 +1,54 @@
-Implement token vesting  
+# Token Vesting Implementation on Ralph/Alephium
 
-#
-TokenVesting Contract Features:
-Constructor Initialization:
+## Overview 🎯
+The **TokenVesting** contract implements a linear vesting schedule for ALPH fungible tokens, enabling controlled token release over time to designated beneficiaries. Built on the Alephium [Fungible Token Standard](https://docs.alephium.org/dapps/standards/fungible-tokens/#fungible-token-standard).
 
-Sets beneficiary address for receiving vested tokens
-Records vesting start time (block.timestamp)
-Sets vesting duration in seconds
-Validates beneficiary is not zero address
-Establishes immutable vesting parameters
+---
 
-Release Function:
+## Contract Features 🚀
 
-Calculates and releases available vested tokens
-Updates released token amounts in tracking
-Transfers tokens to beneficiary address
-Emits ERC20Released event for tracking
-Handles any ERC20 token type
+### **Constructor Initialization**
+- Establishes the **beneficiary address** for receiving vested tokens
+- **Timestamp Recording**: Captures vesting start time from block timestamp
+- **Duration Setting**: Configures total vesting period in seconds
+- **Parameter Locking**: Creates immutable vesting parameters
+- **Validation**: Ensures valid beneficiary address configuration
 
-Vested Amount Calculator:
+### **Release Mechanism**
+- Manages the release of vested tokens to beneficiaries
+- **Amount Calculation**: Determines available tokens for release
+- **Balance Tracking**: Updates released token records
+- **Transfer**: Executes token transfers to beneficiary
+- **Event Emission**: Records token release events
+- **Token Flexibility**: Handles any Fungible Token Standard compliant token
 
-Calculates total vested amount at given timestamp
-Considers total allocation (current balance + released)
-Implements linear vesting schedule
-Handles three time scenarios:
+### **Vesting Calculator**
+- Implements precise vesting amount calculations based on timestamps
+- **Total Assessment**: Factors in current balance plus previously released amounts
+- **Linear Schedule**: Applies proportional vesting over time
+- **Time-based Logic**:
+ - Pre-start: Returns zero
+ - Post-completion: Returns total allocation
+ - Mid-vesting: Calculates linear portion
 
-Before start (returns 0)
-After full duration (returns total)
-During vesting (calculates linear portion)
+### **State Management**
+- **Token Tracking**: Records released amounts per token type
+- **Address Storage**: Maintains beneficiary information
+- **Timing Control**: Stores start and duration parameters
+- **Multi-token Support**: Handles multiple token types simultaneously
 
+---
 
+## Security Features 🔒
+- **Address Validation**: Prevents zero-address assignments
+- **Parameter Protection**: Uses immutable core settings
+- **Safe Transfers**: Implements secure token transfer mechanisms
+- **Precise Math**: Ensures accurate vesting calculations
+- **Overflow Prevention**: Built-in arithmetic safety checks
 
+---
 
-State Management:
-
-Tracks released amounts per token
-Stores immutable beneficiary address
-Records immutable start timestamp
-Maintains immutable vesting duration
-Handles multiple token types simultaneously
-
-#
-Security Features:
-
-Zero address validation  
-Immutable core parameters  
-Safe token transfer handling  
-Accurate vesting calculations  
-Built-in overflow protection  
-
-#
-Instead of using ERC20, please use the Fungible Token Standard: https://docs.alephium.org/dapps/standards/fungible-tokens/#fungible-token-standard
+## Development Notes 🛠️
+- **Token Standard**: Implements Alephium's [Fungible Token Standard](https://docs.alephium.org/dapps/standards/fungible-tokens/#fungible-token-standard)
+- **Future Enhancements**: Consider adding cliff periods or revocation capabilities
+- **Integration**: Can be extended for multiple beneficiary support
