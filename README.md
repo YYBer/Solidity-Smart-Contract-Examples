@@ -21,7 +21,7 @@ Here's a list of examples categorized by difficulty level:
 ### ★★ Medium
 - [TokenVesting](https://github.com/YYBer/Solidity-Smart-Contract-Examples/tree/main/4_TokenVesting)
 - [Signature](https://github.com/YYBer/Solidity-Smart-Contract-Examples/tree/main/5_Signature)
-- [DutchAuction](https://github.com/YYBer/Solidity-Smart-Contract-Examples/tree/main/6_DutschAuction)
+- [DutchAuction](https://github.com/YYBer/Solidity-Smart-Contract-Examples/tree/main/6_DutchAuction)
 
 ### ★★★ Hard
 - [Timelock](https://github.com/YYBer/Solidity-Smart-Contract-Examples/tree/main/7_Timelock)
