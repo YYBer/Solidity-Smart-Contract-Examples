@@ -1,7 +1,32 @@
 # NFT Signature Verification Implementation on Ralph/Alephium
 
 ## Overview 🎯
-The **SignatureNFT** system enables secure NFT minting through signature verification, implementing Alephium's [Non-fungible Token Standard](https://docs.alephium.org/dapps/standards/non-fungible-tokens/). This ensures only authorized parties can mint NFTs through cryptographic authorization.
+The **SignatureNFT** system implements a gas-efficient whitelist mechanism using ECDSA signature verification, following Alephium's [Non-fungible Token Standard](https://docs.alephium.org/dapps/standards/non-fungible-tokens/). Compared to traditional Merkle Tree approaches, this signature-based system offers a more economical solution for whitelist management as signatures are generated off-chain, requiring no gas fees for whitelist distribution.
+
+---
+
+## Whitelist Implementation 📋
+
+### **Cost-Efficient Design**
+- **Off-Chain Signatures**:
+ - Project team signs whitelist addresses off-chain
+ - No gas costs for whitelist distribution
+ - Can include specific tokenId allocation per address
+- **Advantages over Merkle Tree**:
+ - Reduced gas consumption
+ - Flexible whitelist management
+ - Simplified proof verification
+
+### **Whitelist Process**
+1. **Project Team** (Off-chain):
+   - Signs eligible addresses with project wallet
+   - Can specify mintable tokenIds per address
+   - Distributes signatures to whitelist members
+
+2. **Users** (On-chain):
+   - Submit signature during minting
+   - Contract verifies eligibility
+   - Mint succeeds if signature valid
 
 ---
 
@@ -44,37 +69,33 @@ The **SignatureNFT** system enables secure NFT minting through signature verific
 
 ## How It Works 🔧
 
-### Minting Process
+### Whitelist Minting Process
 1. **Signature Creation** (Off-chain):
-   - Authorized signer creates signature for (address, tokenId) pair
-   - Signature proves minting authorization
-   - Each signature is unique to a specific mint request
+   ```typescript
+   // Project team creates whitelist signature
+   signature = projectWallet.sign(
+       keccak256(whitelistAddress + tokenId)
+   )
+   ```
 
 2. **Verification** (On-chain):
-   - Contract receives mint request with signature
-   - Verifies signature using ecRecover
-   - Checks if address has already minted
+   ```typescript
+   // Contract verifies whitelist status
+   mint(
+       address: Address,
+       tokenId: U256,
+       signature: ByteVec
+   ) -> {
+       // Verify signature matches project wallet
+       // Check address hasn't minted
+       // Process mint if valid
+   }
+   ```
 
 3. **NFT Creation**:
    - Upon successful verification
    - Mints NFT to specified address
    - Records mint in contract state
-
-### Example Flow
-```typescript
-// Off-chain: Create signature
-signature = sign(recipientAddress, tokenId)
-
-// On-chain: Mint NFT
-mint(
-    recipientAddress: Address,
-    tokenId: U256,
-    signature: ByteVec
-) -> {
-    // Verify signature
-    // Mint NFT if valid
-}
-```
 
 ---
 
@@ -90,6 +111,7 @@ mint(
 
 ## Development Notes 🛠️
 - **Token Standard**: Implements Alephium's NFT Standard
+- **Gas Efficiency**: Off-chain signature generation saves gas
 - **Integration**: Compatible with standard NFT interfaces
 - **Future Enhancements**: 
   - Multiple authorized signers
