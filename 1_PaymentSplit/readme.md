@@ -7,7 +7,7 @@ The **PaymentSplit** contract enables automatic distribution of ALPH payments am
 
 ## Contract Features 🚀
 
-### **Constructor Initialization**
+### **Contract Initialization**
 - Configures payment distribution through **payee addresses** and their corresponding **share values**.
 - **Validation**: Ensures arrays have matching lengths and non-zero payees.
 - **Share System**: Initializes and stores distribution percentages for all payees.
@@ -35,13 +35,12 @@ The **PaymentSplit** contract enables automatic distribution of ALPH payments am
 ---
 
 ## Security Features 🔒
-- **Address Validation**: Prevents zero-address assignments
-- **Share Requirements**: Enforces non-zero share values
-- **Duplicate Protection**: Prevents multiple registrations of the same payee
-- **Balance Checks**: Validates sufficient funds before releases
-- **Safe Arithmetic**: Implements secure share calculations
-- **Protected Transfers**: Uses secure ALPH transfer mechanisms
-
+- **Address Validation**: Ensures the address is an asset address instead of a contract address.
+- **Duplicate Protection**: Prevents multiple registrations of the same payee.
+- **Balance Checks**: Validates sufficient funds before releases.
+- **Safe Arithmetic**: Implements secure share calculations.
+- **Protected Transfers**: Uses secure ALPH transfer mechanisms.
+- **Dust Amount Protection**: Validates share percentages against the minimum UTXO dust amount (0.001 ALPH) to prevent transaction failures during fund distribution.
 ---
 
 ## Development Notes 🛠️

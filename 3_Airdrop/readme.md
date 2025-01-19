@@ -14,7 +14,6 @@ The **Airdrop** contract enables efficient distribution of both ALPH and fungibl
  - Recipient address array handling
  - Amount distribution configuration
 - **Validation Process**:
- - Verifies sender's token approval
  - Confirms matching array lengths
  - Validates total distribution amount
  - Checks allowance sufficiency
@@ -51,7 +50,6 @@ The **Airdrop** contract enables efficient distribution of both ALPH and fungibl
 
 ## Security Features 🔒
 - **Balance Verification**: Pre-transfer amount validation
-- **Allowance Checks**: Token approval confirmation
 - **Failed Transfer Management**: Robust recovery system
 - **Reentrance Protection**: State-first updates
 - **Safe Transfers**: Secure token handling mechanisms

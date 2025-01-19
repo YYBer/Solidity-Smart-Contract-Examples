@@ -7,7 +7,7 @@ The **TokenVesting** contract implements a linear vesting schedule for ALPH fung
 
 ## Contract Features 🚀
 
-### **Constructor Initialization**
+### **Contract Initialization**
 - Establishes the **beneficiary address** for receiving vested tokens
 - **Timestamp Recording**: Captures vesting start time from block timestamp
 - **Duration Setting**: Configures total vesting period in seconds
@@ -40,7 +40,6 @@ The **TokenVesting** contract implements a linear vesting schedule for ALPH fung
 ---
 
 ## Security Features 🔒
-- **Address Validation**: Prevents zero-address assignments
 - **Parameter Protection**: Uses immutable core settings
 - **Safe Transfers**: Implements secure token transfer mechanisms
 - **Precise Math**: Ensures accurate vesting calculations

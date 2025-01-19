@@ -62,7 +62,6 @@ The **SimpleAMM** contract implements a constant product automated market maker 
  - Constant product maintenance
 - **Transfer Security**:
  - Fungible Token Standard compliance
- - Transfer approval requirements
  - Success validation mechanisms
 
 ---

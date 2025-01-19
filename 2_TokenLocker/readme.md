@@ -7,7 +7,7 @@ The **TokenLocker** contract provides a straightforward mechanism for locking Fu
 
 ## Contract Features 🚀
 
-### **Constructor Initialization**
+### **Contract Initialization**
 - Sets the **target token address** for the locking mechanism
 - **Beneficiary Setup**: Configures recipient address for token release
 - **Duration Control**: Establishes the lock timeframe

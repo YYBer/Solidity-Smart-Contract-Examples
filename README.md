@@ -14,18 +14,17 @@ We're excited to have you here! Please follow the guidelines below to contribute
 Here's a list of examples categorized by difficulty level:
 
 ### ★ Easy
-- [WETH](https://github.com/YYBer/Solidity-Smart-Contract-Examples/tree/main/1_WETH)
-- [PaymentSplit](https://github.com/YYBer/Solidity-Smart-Contract-Examples/tree/main/2_PaymentSplit)
-- [TokenVesting](https://github.com/YYBer/Solidity-Smart-Contract-Examples/tree/main/3_TokenVesting)
-- [TokenLocker](https://github.com/YYBer/Solidity-Smart-Contract-Examples/tree/main/4_TokenLocker)
+- [PaymentSplit](https://github.com/YYBer/Solidity-Smart-Contract-Examples/tree/main/1_PaymentSplit)
+- [TokenLocker](https://github.com/YYBer/Solidity-Smart-Contract-Examples/tree/main/2_TokenLocker)
+- [Airdrop](https://github.com/YYBer/Solidity-Smart-Contract-Examples/tree/main/3_Airdrop)
 
 ### ★★ Medium
-- [Timelock](https://github.com/YYBer/Solidity-Smart-Contract-Examples/tree/main/5_Timelock)
-- [Airdrop](https://github.com/YYBer/Solidity-Smart-Contract-Examples/tree/main/6_Airdrop)
-- [Signature](https://github.com/YYBer/Solidity-Smart-Contract-Examples/tree/main/7_Signature)
+- [TokenVesting](https://github.com/YYBer/Solidity-Smart-Contract-Examples/tree/main/4_TokenVesting)
+- [Signature](https://github.com/YYBer/Solidity-Smart-Contract-Examples/tree/main/5_Signature)
 
 ### ★★★ Hard
-- [DEX](https://github.com/YYBer/Solidity-Smart-Contract-Examples/tree/main/8_DEX)
+- [Timelock](https://github.com/YYBer/Solidity-Smart-Contract-Examples/tree/main/6_Timelock)
+- [DEX](https://github.com/YYBer/Solidity-Smart-Contract-Examples/tree/main/7_DEX)
 
 ---
 
