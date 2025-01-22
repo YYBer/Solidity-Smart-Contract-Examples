@@ -4,6 +4,9 @@
 The **Airdrop** contract enables efficient distribution of both ALPH and fungible tokens to multiple recipients in single transactions. Built on Alephium's [Fungible Token Standard](https://docs.alephium.org/dapps/standards/fungible-tokens/#fungible-token-standard), it provides secure and gas-efficient token distribution with fallback mechanisms.
 
 ---
+## Hint 🔒
+There’s an additional detail regarding multi-asset transactions in RALPH, if you’re familiar with, can simplify the process even further.
+---
 
 ## Contract Features 🚀
 
