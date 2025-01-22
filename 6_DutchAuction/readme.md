@@ -26,7 +26,6 @@ The **Dutch Auction NFT** contract implements a declining price auction mechanis
 - **Supply Management**:
  - Tracks total minted NFTs
  - Enforces collection size limits
- - Sequential token ID assignment
 
 ### **Price Management**
 - **Dynamic Pricing**:

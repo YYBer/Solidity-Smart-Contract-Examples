@@ -1,21 +1,11 @@
 # Governance Timelock Implementation on Ralph/Alephium
 
 ## Overview 🎯
-The **Timelock** contract implements a secure delay mechanism for specific predefined governance actions. Unlike general-purpose timelocks, this implementation focuses on a set of known administrative operations: Bridge Guardian management, token attestation, and chain support management. This provides additional security and time for community review of governance decisions.
+The **Timelock** contract implements a secure delay mechanism for specific predefined governance actions. Unlike general-purpose timelocks, this implementation focuses on a set of known administrative operations: token attestation, and chain support management. This provides additional security and time for community review of governance decisions.
 
 ---
 
 ## Contract Features 🚀
-
-### **Bridge Guardian Management**
-- Enables administrators to manage Bridge Guardians with time delay
-- **Parameter Management**: 
- - New Guardian address registration
- - Guardian revocation handling
- - Permission configuration
-- **Time Control**: Enforces minimum delay requirements
-- **Storage**: Maintains Guardian state records
-- **Event Emission**: Logs Guardian operations for transparency
 
 ### **Token Attestation**
 - Manages the addition of new tokens to the bridge
@@ -61,17 +51,6 @@ The **Timelock** contract implements a secure delay mechanism for specific prede
 ---
 
 ## Supported Actions 🛠️
-
-### Guardian Operations
-```typescript
-// Add a new Bridge Guardian
-proposeGuardian(guardianAddress: Address)
-executeAddGuardian(guardianAddress: Address)
-
-// Revoke a Bridge Guardian
-proposeGuardianRevocation(guardianAddress: Address)
-executeGuardianRevocation(guardianAddress: Address)
-```
 
 ### Token Operations
 ```typescript
