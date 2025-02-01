@@ -1,0 +1,43 @@
+
+
+Contract TokenVesting(
+    beneficiary: Address,
+    durationMs: U256,
+    startMs: U256,
+    token: ByteVec,
+    mut tokenReleased: U256
+) {
+
+    event TokenReleased(amount: U256)
+
+    enum ErrorCodes {
+        InvalidWithdrawAmount = 0
+    }
+
+    @using(assetsInContract = true, checkExternalCaller = false, updateFields = true)
+    pub fn release() -> () {
+        let amount = vestedAmount(blockTimeStamp!()) - tokenReleased
+        emit Debug(`amount: ${amount}`)
+        assert!(amount != 0, ErrorCodes.InvalidWithdrawAmount)
+        tokenReleased = tokenReleased + amount
+        transferTokenFromSelf!(beneficiary, token, amount)
+        emit TokenReleased(amount)
+    }
+
+    @using(assetsInContract = true, checkExternalCaller = false)
+    pub fn vestedAmount(timestamp: U256) -> U256 {
+        let mut amount = 0
+        let totalAllocation = tokenRemaining!(selfAddress!(), token) + tokenReleased
+        if (timestamp < startMs) {
+            amount = 0
+        } else if (timestamp > startMs + durationMs) {
+            amount = totalAllocation
+        } else {
+            amount = (totalAllocation * (timestamp - startMs)) / durationMs
+        }
+        if (token == ALPH) {
+            assert!(amount > dustAmount!(), ErrorCodes.InvalidWithdrawAmount)
+        }
+        return amount
+    }
+}
