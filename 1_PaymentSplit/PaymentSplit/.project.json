@@ -1,0 +1,21 @@
+{
+  "fullNodeVersion": "v3.11.1",
+  "compilerOptionsUsed": {
+    "ignoreUnusedConstantsWarnings": false,
+    "ignoreUnusedVariablesWarnings": false,
+    "ignoreUnusedFieldsWarnings": false,
+    "ignoreUnusedPrivateFunctionsWarnings": false,
+    "ignoreUpdateFieldsCheckWarnings": false,
+    "ignoreCheckExternalCallerWarnings": false,
+    "ignoreUnusedFunctionReturnWarnings": false,
+    "skipAbstractContractCheck": false
+  },
+  "infos": {
+    "PaymentSplit": {
+      "sourceFile": "PaymentSplit.ral",
+      "sourceCodeHash": "0d8e312cda909587e2d723c0a4909fc303509120335dce22af924726a665005c",
+      "bytecodeDebugPatch": "=6-2+9e=2+c=1-1=1-2=1-1=2-1=2-1+834=1+9c=12-2+33=102+7a7e0214696e73657274206174206d617020706174683a2000=62+7a7e0214696e73657274206174206d617020706174683a2000=285-1+8=126+7a7e0214696e73657274206174206d617020706174683a2000=84",
+      "codeHashDebug": "baaecd7e2887224ce3c9a1246194131cb9d79a35713f22816640654468f2d90e"
+    }
+  }
+}

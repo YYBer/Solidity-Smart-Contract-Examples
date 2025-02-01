@@ -1,0 +1,35 @@
+
+// Defines a contract named `TokenFaucet`.
+// A contract is a collection of fields (its state) and functions.
+// Once deployed, a contract resides at a specific address on the Alephium blockchain.
+// Contract fields are permanently stored in contract storage.
+// A contract can issue an initial amount of token at its deployment.
+Contract TokenLocker(
+    beneficiary: Address,
+    durationMs: U256,
+    startMs: U256,
+    token: ByteVec
+) {
+
+    // Events allow for logging of activities on the blockchain.
+    // Alephium clients can listen to events in order to react to contract state changes.
+    event Release(beneficiary: Address, token: ByteVec, releaseTime: U256, amount: U256)
+
+
+    enum ErrorCodes {
+        InvalidReleaseTime = 0
+        InvalidWithdrawAmount = 1
+    }
+
+    @using(assetsInContract = true, checkExternalCaller = false)
+    pub fn release() -> () {
+        assert!(blockTimeStamp!() >= startMs + durationMs, ErrorCodes.InvalidReleaseTime)
+        let mut amount = tokenRemaining!(selfAddress!(), token)
+        assert!(amount != 0, ErrorCodes.InvalidWithdrawAmount)
+        if (token == ALPH) {
+            amount = amount - (1 * 10 ** 17)
+        }
+        transferTokenFromSelf!(beneficiary, token, amount)
+        emit Release(beneficiary, token, blockTimeStamp!(), amount)
+    }
+}
