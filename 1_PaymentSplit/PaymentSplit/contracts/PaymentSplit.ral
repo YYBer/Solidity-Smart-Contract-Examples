@@ -1,0 +1,65 @@
+Contract PaymentSplit(
+    mut totalShares: U256,
+    mut totalReleased: U256,
+    mut payeesLength: U256
+) {
+    mapping[Address, U256] sharesMapping
+    mapping[Address, U256] releasedMapping
+    mapping[U256, Address] payeesMapping
+
+    event PayeeAdded(account: Address, shares: U256)
+    event PaymentReleased(account: Address, amount: U256)
+    event PaymentReceived(account: Address, amount: U256)
+
+    enum ErrorCodes {
+        SharesAreZero = 1
+        AccountAlreadyHasShares = 2
+        AccountHasNoShares = 3
+        AccountIsNotDuePayment = 4
+    }
+
+    @using(updateFields = true, checkExternalCaller = false, preapprovedAssets = true)
+    pub fn addPayee(account: Address, shares: U256) -> () {
+        assert!(shares > 0, ErrorCodes.SharesAreZero)
+        assert!(!sharesMapping.contains!(account), ErrorCodes.AccountAlreadyHasShares)
+
+        payeesMapping.insert!(callerAddress!(), payeesLength, account)
+        payeesLength = payeesLength + 1
+        sharesMapping.insert!(callerAddress!(), account, shares)
+        totalShares = totalShares + shares
+
+        emit PayeeAdded(account, shares)
+    }
+
+    pub fn pendingPayment(account: Address, totalReceived: U256, alreadyReleased: U256) -> U256 {
+        return (totalReceived * sharesMapping[account]) / totalShares - alreadyReleased
+    }
+
+    pub fn releasable(account: Address) -> U256 {
+        let totalReceived = sharesMapping[account] + totalReleased
+        let payment = pendingPayment(account, totalReceived, 0)
+        if (payment < dustAmount!()) {
+            return dustAmount!()
+        }
+        return payment
+    }
+
+    @using(updateFields = true, assetsInContract = true, preapprovedAssets = true, checkExternalCaller = false)
+    pub fn release(account: Address) -> () {
+        assert!(sharesMapping.contains!(account), ErrorCodes.AccountHasNoShares)
+        let payment = releasable(account)
+        assert!(payment != 0, ErrorCodes.AccountIsNotDuePayment)
+        totalReleased = totalReleased + payment
+        releasedMapping.insert!(callerAddress!(), account, payment)
+        transferTokenFromSelf!(account, ALPH, payment)
+
+        emit PaymentReleased(account, payment)
+    }
+
+    @using(assetsInContract = true, checkExternalCaller = false, preapprovedAssets = true)
+    pub fn deposit(amount: U256) -> () {
+        let from = callerAddress!()
+        transferTokenToSelf!{from -> ALPH: amount}(from, ALPH, amount)
+        emit PaymentReceived(from, amount)
+    }
+}

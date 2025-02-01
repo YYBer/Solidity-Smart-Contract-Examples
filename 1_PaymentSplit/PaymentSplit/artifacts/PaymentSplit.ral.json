@@ -1,0 +1,186 @@
+{
+  "version": "v3.11.1",
+  "name": "PaymentSplit",
+  "bytecode": "0305406c409740e1413841510103020200402fd3752f75f316010c330d7b140a5f5f6d61705f5f305f5f16004744cbc5190e7bb4d1a2140a5f5f6d61705f5f325f5fa0024044b11600d20101a0020d2aa102b4d1a2140a5f5f6d61705f5f305f5f16004744b11601d20101a00016012aa10005160016015f010003030111d329f7bbc916010c0d0d140a5f5f6d61705f5f305f5f16004744cb01012ca0002d16022b0201000103011ad33344e43a0c0d0d140a5f5f6d61705f5f305f5f16004744cb0101a0012a1701160016010c00011702160213c3038d7ea4c68000314c0213c3038d7ea4c680000216020201010102004026d34a509e39140a5f5f6d61705f5f305f5f16004744cbc50f7b16000002170116010c30107ba00116012aa101b4d1a2140a5f5f6d61705f5f315f5f16004744b11601d2010116001601a806160016015f01010102000ad3d385e15cb4170116011600a907160116005f",
+  "codeHash": "6c0f4a4a66f779520fb3fd1f0d6bb270f1a834b31df05a7341d2038b8d9e3230",
+  "fieldsSig": {
+    "names": [
+      "totalShares",
+      "totalReleased",
+      "payeesLength"
+    ],
+    "types": [
+      "U256",
+      "U256",
+      "U256"
+    ],
+    "isMutable": [
+      true,
+      true,
+      true
+    ]
+  },
+  "eventsSig": [
+    {
+      "name": "PayeeAdded",
+      "fieldNames": [
+        "account",
+        "shares"
+      ],
+      "fieldTypes": [
+        "Address",
+        "U256"
+      ]
+    },
+    {
+      "name": "PaymentReleased",
+      "fieldNames": [
+        "account",
+        "amount"
+      ],
+      "fieldTypes": [
+        "Address",
+        "U256"
+      ]
+    },
+    {
+      "name": "PaymentReceived",
+      "fieldNames": [
+        "account",
+        "amount"
+      ],
+      "fieldTypes": [
+        "Address",
+        "U256"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "addPayee",
+      "paramNames": [
+        "account",
+        "shares"
+      ],
+      "paramTypes": [
+        "Address",
+        "U256"
+      ],
+      "paramIsMutable": [
+        false,
+        false
+      ],
+      "returnTypes": []
+    },
+    {
+      "name": "pendingPayment",
+      "paramNames": [
+        "account",
+        "totalReceived",
+        "alreadyReleased"
+      ],
+      "paramTypes": [
+        "Address",
+        "U256",
+        "U256"
+      ],
+      "paramIsMutable": [
+        false,
+        false,
+        false
+      ],
+      "returnTypes": [
+        "U256"
+      ]
+    },
+    {
+      "name": "releasable",
+      "paramNames": [
+        "account"
+      ],
+      "paramTypes": [
+        "Address"
+      ],
+      "paramIsMutable": [
+        false
+      ],
+      "returnTypes": [
+        "U256"
+      ]
+    },
+    {
+      "name": "release",
+      "paramNames": [
+        "account"
+      ],
+      "paramTypes": [
+        "Address"
+      ],
+      "paramIsMutable": [
+        false
+      ],
+      "returnTypes": []
+    },
+    {
+      "name": "deposit",
+      "paramNames": [
+        "amount"
+      ],
+      "paramTypes": [
+        "U256"
+      ],
+      "paramIsMutable": [
+        false
+      ],
+      "returnTypes": []
+    }
+  ],
+  "constants": [],
+  "enums": [
+    {
+      "name": "ErrorCodes",
+      "fields": [
+        {
+          "name": "SharesAreZero",
+          "value": {
+            "type": "U256",
+            "value": "1"
+          }
+        },
+        {
+          "name": "AccountAlreadyHasShares",
+          "value": {
+            "type": "U256",
+            "value": "2"
+          }
+        },
+        {
+          "name": "AccountHasNoShares",
+          "value": {
+            "type": "U256",
+            "value": "3"
+          }
+        },
+        {
+          "name": "AccountIsNotDuePayment",
+          "value": {
+            "type": "U256",
+            "value": "4"
+          }
+        }
+      ]
+    }
+  ],
+  "mapsSig": {
+    "names": [
+      "sharesMapping",
+      "releasedMapping",
+      "payeesMapping"
+    ],
+    "types": [
+      "Map[Address,U256]",
+      "Map[Address,U256]",
+      "Map[U256,Address]"
+    ]
+  }
+}
