@@ -1,0 +1,83 @@
+
+Contract Timelock(
+    delay: U256,
+    mut admin: Address,
+    gracePeriod: U256
+) {
+    mapping[ByteVec, Bool] queuedTransactions
+
+    event QueueTransaction(txHash: ByteVec, target: Address, value: U256, signature: ByteVec, data: ByteVec, executeTime: U256)
+    event ExecuteTransaction(txHash: ByteVec, target: Address, value: U256, signature: ByteVec, data: ByteVec, executeTime: U256)
+    event CancelTransaction(txHash: ByteVec, target: Address, value: U256, signature: ByteVec, data: ByteVec, executeTime: U256)
+    event NewAdmin(newAdmin: Address)
+
+    enum ErrorCodes {
+        CallerNotTimelock = 0
+        CallerNotAdmin = 1
+        EstimatedExecutionBlockMustSatisfyDelay = 2
+        TransactionNotQueued = 3
+        TransactionHasNotSurpassedTimeLock = 4
+        TransactionIsStale = 5
+    }
+
+    fn onlyTimelock() -> () {
+        assert!(callerAddress!() == selfAddress!(), ErrorCodes.CallerNotTimelock)
+    }
+
+    fn onlyOwner() -> () {
+        assert!(callerAddress!() == admin, ErrorCodes.CallerNotAdmin)
+    }
+
+    pub fn changeAdmin(newAdmin: Address) -> () {
+        onlyTimelock()
+        admin = newAdmin
+        emit NewAdmin(newAdmin)
+    }
+
+    fn getBlockTimestamp() -> U256 {
+        return blockTimeStamp!()
+    }
+
+    fn getTxHash(target: Address, value: U256, signature: ByteVec, data: ByteVec, executeTime: U256) -> ByteVec {
+        return keccak256!(#00)
+    }
+
+    @using(updateFields = true, preapprovedAssets = true, checkExternalCaller = false)
+    pub fn queueTransaction(target: Address, value: U256, signature: ByteVec, data: ByteVec, executeTime: U256) -> ByteVec {
+        onlyOwner()
+        assert!(executeTime >= getBlockTimestamp() + delay, ErrorCodes.EstimatedExecutionBlockMustSatisfyDelay)
+
+        let txHash = getTxHash(target, value, signature, data, executeTime)
+        queuedTransactions.insert!(callerAddress!(), txHash, true)
+
+        emit QueueTransaction(txHash, target, value, signature, data, executeTime)
+
+        return txHash
+    }
+
+    pub fn cancelTransaction(target: Address, value: U256, signature: ByteVec, data: ByteVec, executeTime: U256) -> () {
+        onlyOwner()
+
+        let txHash = getTxHash(target, value, signature, data, executeTime)
+        assert!(queuedTransactions.contains!(txHash), ErrorCodes.TransactionNotQueued)
+
+        queuedTransactions.remove!(callerAddress!(), txHash)
+
+        emit CancelTransaction(txHash, target, value, signature, data, executeTime)
+    }
+
+    pub fn executeTransaction(target: Address, value: U256, signature: ByteVec, data: ByteVec, executeTime: U256) -> ByteVec {
+        onlyOwner()
+
+        let txHash = getTxHash(target, value, signature, data, executeTime)
+        assert!(queuedTransactions.contains!(txHash), ErrorCodes.TransactionNotQueued)
+        assert!(getBlockTimestamp() >= executeTime, ErrorCodes.TransactionHasNotSurpassedTimeLock)
+        assert!(getBlockTimestamp() <= executeTime + gracePeriod, ErrorCodes.TransactionIsStale)
+
+        queuedTransactions.remove!(callerAddress!(), txHash)
+
+        emit ExecuteTransaction(txHash, target, value, signature, data, executeTime)
+
+        return txHash
+    }
+}
