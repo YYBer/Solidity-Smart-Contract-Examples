@@ -1,0 +1,74 @@
+{
+  "version": "v3.11.1",
+  "name": "TokenLocker",
+  "bytecode": "0401404301020001004027d3f45a8bd356ce02ce012a340c7bb2ce03a5170016000c300d7bce03cd414c0816000d130a1311832c2b1700ce00ce031600ab05ce00ce0356160061",
+  "codeHash": "d0258595ed54599e7694c37a1e0a23c000b578cdf0ba6982f484ed2ac5a17f56",
+  "fieldsSig": {
+    "names": [
+      "beneficiary",
+      "durationMs",
+      "startMs",
+      "token"
+    ],
+    "types": [
+      "Address",
+      "U256",
+      "U256",
+      "ByteVec"
+    ],
+    "isMutable": [
+      false,
+      false,
+      false,
+      false
+    ]
+  },
+  "eventsSig": [
+    {
+      "name": "Release",
+      "fieldNames": [
+        "beneficiary",
+        "token",
+        "releaseTime",
+        "amount"
+      ],
+      "fieldTypes": [
+        "Address",
+        "ByteVec",
+        "U256",
+        "U256"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "release",
+      "paramNames": [],
+      "paramTypes": [],
+      "paramIsMutable": [],
+      "returnTypes": []
+    }
+  ],
+  "constants": [],
+  "enums": [
+    {
+      "name": "ErrorCodes",
+      "fields": [
+        {
+          "name": "InvalidReleaseTime",
+          "value": {
+            "type": "U256",
+            "value": "0"
+          }
+        },
+        {
+          "name": "InvalidWithdrawAmount",
+          "value": {
+            "type": "U256",
+            "value": "1"
+          }
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "fullNodeVersion": "v3.11.1",
+  "compilerOptionsUsed": {
+    "ignoreUnusedConstantsWarnings": false,
+    "ignoreUnusedVariablesWarnings": false,
+    "ignoreUnusedFieldsWarnings": false,
+    "ignoreUnusedPrivateFunctionsWarnings": false,
+    "ignoreUpdateFieldsCheckWarnings": false,
+    "ignoreCheckExternalCallerWarnings": false,
+    "ignoreUnusedFunctionReturnWarnings": false,
+    "skipAbstractContractCheck": false
+  },
+  "infos": {
+    "TokenVesting": {
+      "sourceFile": "TokenVesting.ral",
+      "sourceCodeHash": "94e8cf45e75cd36cdaa31192b155babf0a302bca1679f30e9e0e33a9c5a0b3a3",
+      "bytecodeDebugPatch": "=6-2+39=2-2+91=11-1+8=24+0016007e0208616d6f756e743a20=226",
+      "codeHashDebug": "3268309939c47148debad7ad4d138b32a718695e4e030a000e5dd15860c61f87"
+    }
+  }
+}

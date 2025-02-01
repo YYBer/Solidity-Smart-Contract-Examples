@@ -1,0 +1,79 @@
+{
+  "version": "v3.11.1",
+  "name": "TokenVesting",
+  "bytecode": "0502402b4083010200010016d3f45a8bd3560001a0002b170016000c300c7ba00016002aa100ce00ce031600ab0516005e0102010301402cd31379b9d50c1701b2ce03a5a0002a17021600ce02314c030c17014a111600ce02ce012a334c03160217014a0816021600ce022b2cce012d1701ce03cd414c05160113c3038d7ea4c68000330c7b160102",
+  "codeHash": "f978355615d78fa01e1a08a2220c3ba411af06c1d0caf4fd1098a4371a654f9d",
+  "fieldsSig": {
+    "names": [
+      "beneficiary",
+      "durationMs",
+      "startMs",
+      "token",
+      "tokenReleased"
+    ],
+    "types": [
+      "Address",
+      "U256",
+      "U256",
+      "ByteVec",
+      "U256"
+    ],
+    "isMutable": [
+      false,
+      false,
+      false,
+      false,
+      true
+    ]
+  },
+  "eventsSig": [
+    {
+      "name": "TokenReleased",
+      "fieldNames": [
+        "amount"
+      ],
+      "fieldTypes": [
+        "U256"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "release",
+      "paramNames": [],
+      "paramTypes": [],
+      "paramIsMutable": [],
+      "returnTypes": []
+    },
+    {
+      "name": "vestedAmount",
+      "paramNames": [
+        "timestamp"
+      ],
+      "paramTypes": [
+        "U256"
+      ],
+      "paramIsMutable": [
+        false
+      ],
+      "returnTypes": [
+        "U256"
+      ]
+    }
+  ],
+  "constants": [],
+  "enums": [
+    {
+      "name": "ErrorCodes",
+      "fields": [
+        {
+          "name": "InvalidWithdrawAmount",
+          "value": {
+            "type": "U256",
+            "value": "0"
+          }
+        }
+      ]
+    }
+  ]
+}
