@@ -1,0 +1,21 @@
+{
+  "fullNodeVersion": "v3.11.1",
+  "compilerOptionsUsed": {
+    "ignoreUnusedConstantsWarnings": false,
+    "ignoreUnusedVariablesWarnings": false,
+    "ignoreUnusedFieldsWarnings": false,
+    "ignoreUnusedPrivateFunctionsWarnings": false,
+    "ignoreUpdateFieldsCheckWarnings": false,
+    "ignoreCheckExternalCallerWarnings": false,
+    "ignoreUnusedFunctionReturnWarnings": false,
+    "skipAbstractContractCheck": false
+  },
+  "infos": {
+    "TokenLocker": {
+      "sourceFile": "TokenLocker.ral",
+      "sourceCodeHash": "12a6356a550826fda366eca109bcb114a0a08c9f024c8218d8ee416d718e33ba",
+      "bytecodeDebugPatch": "",
+      "codeHashDebug": "d0258595ed54599e7694c37a1e0a23c000b578cdf0ba6982f484ed2ac5a17f56"
+    }
+  }
+}
